@@ -74,7 +74,7 @@ class ArrayAnalyzerService
             ? max(1, min((int) $this->config['max_size'], (int) $data['arraySize']))
             : 10;
 
-        $config = $this->config; // przekazanie do match
+        $config = $this->config; //TODO validation do random
         $this->logger->info('Generowanie tablicy liczb losowo.', ['strategy' => $strategy, 'size' => $size]);
 
         return match ($strategy) {
