@@ -1,0 +1,20 @@
+<div id="resultContainer" class="flex-fill w-100 d-flex justify-content-center align-items-center">
+    {% if result is not null %}
+        <div class="card shadow-lg p-5 result-card glass-card text-center flex-fill w-100">
+            <h4 class="mb-4 text-dark">
+                <i class="bi bi-bar-chart-fill result-icon"></i> Wynik
+            </h4>
+            <span class="badge bg-warning fs-1 px-4 py-3">
+                {% if result.strategy == 'completeness' %}
+                    {{ result.value ? '✅ True' : '❌ False' }}
+                {% else %}
+                    {{ result.value|default('Brak wyniku') }}
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        <div class="card shadow-lg p-4 glass-card text-center text-muted flex-fill w-100">
+            Wynik pojawi się tutaj po analizie 🔍
+        </div>
+    {% endif %}
+</div>

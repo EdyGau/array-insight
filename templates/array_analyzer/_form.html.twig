@@ -1,0 +1,53 @@
+<div class="card shadow-lg p-4 glass-card flex-fill w-100">
+    <h3 class="text-center mb-4">
+        <i class="bi bi-gear-fill me-2"></i> Parametry wejściowe
+    </h3>
+
+    {{ form_start(form, {
+        attr: {'id': 'arrayForm'},
+        method: 'post',
+        action: path('app_array_analyzer')
+    }) }}
+
+    <div class="mb-3">
+        {{ form_label(form.strategy) }}
+        {{ form_widget(form.strategy, {'attr': {'class': 'form-select' ~ (form.strategy.vars.valid ? '' : ' is-invalid')}}) }}
+        {% if form.strategy.vars.errors|length %}
+            <div class="invalid-feedback d-block">{{ form_errors(form.strategy) }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3 form-check form-switch">
+        {{ form_widget(form.manualInput, {'attr': {'class': 'form-check-input', 'id': 'manualInput'}}) }}
+        <label class="form-check-label" for="manualInput">
+            <i class="bi bi-pencil-square"></i> Wprowadzę własne dane
+        </label>
+        {% if form.manualInput.vars.errors|length %}
+            <div class="invalid-feedback d-block">{{ form_errors(form.manualInput) }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3 fade-toggle {{ form.manualInput.vars.data ? 'show' : 'hide' }}" id="numbersField">
+        {{ form_label(form.numbers) }}
+        {{ form_widget(form.numbers, {'attr': {'class': 'form-control shadow-sm' ~ (form.numbers.vars.valid ? '' : ' is-invalid')}}) }}
+        {% if form.numbers.vars.errors|length %}
+            <div class="invalid-feedback d-block">{{ form_errors(form.numbers) }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3 fade-toggle {{ form.manualInput.vars.data ? 'hide' : 'show' }}" id="sizeField">
+        {{ form_label(form.arraySize) }}
+        {{ form_widget(form.arraySize, {'attr': {'class': 'form-control shadow-sm' ~ (form.arraySize.vars.valid ? '' : ' is-invalid')}}) }}
+        {% if form.arraySize.vars.errors|length %}
+            <div class="invalid-feedback d-block">{{ form_errors(form.arraySize) }}</div>
+        {% endif %}
+    </div>
+
+    <div class="d-grid mt-auto">
+        <button type="submit" class="btn btn-warning btn-lg fw-bold text-white">
+            <i class="bi bi-play-circle-fill"></i> Analizuj
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+</div>

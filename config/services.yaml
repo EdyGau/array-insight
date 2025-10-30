@@ -1,0 +1,30 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: '../src/'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Service\Strategy\:
+        resource: '../src/Service/Strategy'
+        tags: ['app.array_strategy']
+
+    App\Service\Strategy\Validation\:
+        resource: '../src/Service/Strategy/Validation'
+        tags: ['app.validation_strategy']
+
+    App\Service\ArrayAnalyzerService:
+        arguments:
+            $strategies: !tagged_iterator app.array_strategy
+            $validationStrategies: !tagged_iterator app.validation_strategy
+            $logger: '@logger'
+            $config: '%array_analyzer%'
+
+    App\Validator\ArrayNumbersValidator:
+        tags:
+            - { name: validator.constraint_validator }

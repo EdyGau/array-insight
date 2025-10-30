@@ -1,0 +1,7 @@
+parameters:
+    #Limity walidacji dla tablic w ArrayAnalyzerService
+    array_analyzer:
+        max_size: 100000
+        max_unique_range: 100000
+        max_completeness_range: 1000000
+        max_completeness_count: 10000
